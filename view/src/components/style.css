@@ -1,0 +1,27 @@
+.std-box-component {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  width: 335px;
+  height: 32px;
+  margin-bottom: 8px;
+}
+
+.dashed-border {
+  border: dashed black;
+}
+
+.solid-border {
+  border: solid black;
+}
+
+.text-defaultRegular {
+  font-size: 16px;
+}
+
+.column {
+  flex: 1; 
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+}
