@@ -1,9 +1,9 @@
 const pool = require('../model/database');
 
 exports.create = async (req, res) => {
-  const { task, category } = req.body;
-  let queryString = 'INSERT INTO todo_db (task, category) VALUES ($1, $2)';
-  let queryValues = [task, category];
+  const { task, category, created_at } = req.body;
+  let queryString = 'INSERT INTO todo_db (task, category, created_at) VALUES ($1, $2, $3)';
+  let queryValues = [task, category, created_at];
   try {
     const queryResult = await pool.query(queryString, queryValues);
     return res.status(201).json(`New Task: ${task} `); // sending the queryResult back to the client in JSON format
@@ -39,8 +39,6 @@ exports.update = async (req, res) => {
   const id = Number(req.params.id);
   let queryString = `UPDATE todo_db SET ${dynamicQuery(req.body)} WHERE todo_id = $1`;
   let queryValues = [id].concat(Object.values(req.body));
-  console.log(queryValues)
-  console.log(queryString)
   try {
     const queryResult = await pool.query(queryString, queryValues);
     return res.status(200).json(`Task with ID: ${id}, updated`);
@@ -64,4 +62,8 @@ exports.remove = async (req, res) => {
 // takes in an object, in this case key/value pairs of our todo object and then returns a string for querying, NOTE the function ADDS 2, so the todo_id can always be $1 in a query
 const dynamicQuery = (obj) => {
   return Object.keys(obj).map((item, index) => `${item} = $${index+2}`).join(', ')
+}
+
+exports.updateTest = (req, res) => {
+  return res.json(req.body)
 }

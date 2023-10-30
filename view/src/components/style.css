@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   padding: 4px 8px;
-  width: 335px;
+  width: auto; 
   height: 32px;
   margin-bottom: 8px;
 }
@@ -19,9 +19,39 @@
   font-size: 16px;
 }
 
+.kanban-board {
+  display: flex;
+  gap: 4px;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Distribute available space evenly */
+  gap: 4px;
+}
+
 .column {
+  flex: 1; /* Distribute available space evenly */
+  border: 1px solid #ccc; /* Optional: Add borders for better visualization */
+  padding: 20px; /* Optional: Add padding for spacing */
+  text-align: center; /* Optional: Center text within columns */
+}
+
+
+/* .column {
   flex: 1; 
   border: 1px solid #ccc;
   padding: 20px;
   text-align: center;
+}
+
+.kanban-board {
+  display: flex;
+} */
+
+.col-heading {
+  font-weight: 700;
+  margin-top: -5px;
+  text-decoration: underline;
 }

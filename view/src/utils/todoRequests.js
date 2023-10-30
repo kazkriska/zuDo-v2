@@ -10,7 +10,7 @@ export const createTodo = async (data) => {
 };
 
 // Gets ALL Todos
-export const readTodos = async () => {
+export const fetchAllTodos = async () => {
   const res = await fetch('/api/todo', {
     method: 'GET',
   });
@@ -18,7 +18,7 @@ export const readTodos = async () => {
 };
 
 // Gets UNIQUE (1) Todo
-export const readTodo = async (_id) => {
+export const fetchTodoById = async (_id) => {
   const res = await fetch(`/api/todo/${_id}`, {
     method: 'GET',
   });

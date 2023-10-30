@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
+import KanbanBoard from './components/KanbanBoard';
+import './components/style.css'
 
 function App() {
-  
-  return (
-    <div className="kanban-board">
-
-    </div>
-  );
+  return <KanbanBoard />;
 }
 
 export default App;
