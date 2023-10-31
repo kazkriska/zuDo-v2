@@ -12,3 +12,13 @@ const formatDateToYYYYMMDD = (inputString) => {
 };
 
 export default formatDateToYYYYMMDD;
+
+// ! DOWNSTAIRS CODE IS ONLY FOR DATE FORMATTING TESTING PURPOSES
+
+// console.log(formatDateToYYYYMMDD("2023-10-31T03:13:14.599Z"))
+// console.log(new Date('2023-10-31T03:13:14.599Z'));
+// console.log(new Date('2023-10-31 14:13:14.599+11').toLocaleString())  // ! This gives an output the user can read in UI easily, in systems local format
+
+
+
+// "2023-10-31T03:13:14.599Z"

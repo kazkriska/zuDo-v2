@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { TodoDataContext } from '../Column';
 import formatDateToYYYYMMDD from '../../utils/formatDateToYYYYMMDD';
 import { updateTodo } from '../../utils/todoRequests';
+import TodoPropertiesDisplay from './TodoPropertiesDisplay';
 
 const TodoPropertiesForm = ({ closeOnSubmit }) => {
   const todoData = useContext(TodoDataContext);
@@ -18,9 +19,9 @@ const TodoPropertiesForm = ({ closeOnSubmit }) => {
   };
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <form onSubmit={handleSubmit}>
-        <fieldset>
+        <fieldset style={{ textAlign: 'left' }}>
           <label htmlFor="todoCategory">Category: </label>
           <select
             name="todoCategory"
@@ -37,6 +38,7 @@ const TodoPropertiesForm = ({ closeOnSubmit }) => {
             <option value="backlog">Backlog</option>
           </select>
           <br />
+          <br />
           <label htmlFor="dueDate">Due Date:</label>
           <input
             type="date"
@@ -52,8 +54,11 @@ const TodoPropertiesForm = ({ closeOnSubmit }) => {
           />
         </fieldset>
         <br />
-        <button type="submit">Save</button>
+        <button type="submit" style={{ alignSelf: 'center' }}>
+          Save
+        </button>
       </form>
+      <TodoPropertiesDisplay />
     </div>
   );
 };

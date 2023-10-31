@@ -13,3 +13,13 @@ CREATE TABLE todo_db(
 -- UPDATE todo_db SET task = $1, category = $2, created_at = $3 WHERE task_id = $4
 
 -- DELETE FROM todo_db WHERE task_id = $1
+
+-- CREATE TABLE todo_db(
+--     todo_id SERIAL PRIMARY KEY,
+--     task VARCHAR(30) NOT NULL, 
+--     category VARCHAR(30) NOT NULL, 
+--     created_at TIMESTAMPTZ,
+--   	due_on TIMESTAMPTZ
+-- );
+
+-- CREATE TABLE dupe_todo AS (SELECT * from todo_db);
