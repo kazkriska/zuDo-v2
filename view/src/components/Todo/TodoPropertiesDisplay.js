@@ -8,7 +8,7 @@ const TodoPropertiesDisplay = () => {
   todoData = {
     ...todoData,
     created_at: new Date(todoData.created_at).toLocaleString(),
-    due_on: !todoData.due_on ? 'Not Specified' : new Date(todoData.due_on).toLocaleString(),
+    due_on: !todoData.due_on ? 'Not Specified' : new Date(todoData.due_on).toLocaleDateString(),   // PREVIOUSLY: .toLocaleString(), changed so the UI doesnt render a random time as our input only stores date not time // ! can be changed later when adding extra features
   };
 
   return (

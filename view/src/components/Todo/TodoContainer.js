@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import TodoDisplay from './TodoDisplay';
 import { TodoDataContext } from '../Column';
 import TodoForm from './TodoForm';
@@ -8,6 +8,23 @@ const TodoContainer = () => {
   const todoData = useContext(TodoDataContext);
   const [isEditing, setIsEditing] = useState(false);
   const [task, setTask] = useState(todoData.task); // holds the state of the input which represents the todo's task value
+  const containerRef = useRef(null);
+
+  const handleOutsideClick = (e) => {
+    if (containerRef.current && !containerRef.current.contains(e.target)) {
+      setIsEditing(false);
+      setTask(todoData.task)
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+    // ! Be careful, in future this might behave unexpectedly because of dependency array being empty
+    // eslint-disable-next-line 
+  }, []);
 
   //handles editing existing todo
   const handleSubmit = (e) => {
@@ -26,7 +43,7 @@ const TodoContainer = () => {
   };
 
   return (
-    <div>
+    <div ref={containerRef}>
       {isEditing ? (
         <TodoForm
           handleSubmit={handleSubmit}
