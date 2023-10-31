@@ -8,8 +8,8 @@ const router = express.Router();
 router.post('/todo/create', create);
 router.get('/todo', readAll)
 router.get('/todo/:id', readUnique)
-// router.put('/todo/:id', update)
-router.put('/todo/:id', updateTest)
+router.put('/todo/:id', update)
+// router.put('/todo/:id', updateTest)
 router.delete('/todo/:id', remove)
 
 module.exports = router;

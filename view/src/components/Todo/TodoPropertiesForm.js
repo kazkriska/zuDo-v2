@@ -8,13 +8,11 @@ const TodoPropertiesForm = ({ closeOnSubmit }) => {
   const todoData = useContext(TodoDataContext);
   const [todoProperties, setTodoProperties] = useState(todoData);
 
-  //console.log(todoProperties)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateTodo(todoData.todo_id, todoProperties).then((res) =>
-      console.log(res)
-    );
+    const { category, due_on } = todoProperties;
+    updateTodo(todoData.todo_id, { category, due_on });
     closeOnSubmit();
   };
 

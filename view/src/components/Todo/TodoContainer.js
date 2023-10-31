@@ -36,7 +36,7 @@ const TodoContainer = () => {
         />
       ) : (
         <TodoDisplay
-          handleDoubleClick={() => setIsEditing((state) => !state)} // TodoContainer passes the eventhandler as a prop to TodoDisplay as only Container has the state of isEditing
+          handleDoubleClick={() => setIsEditing((state) => !state)} // <TodoContainer> passes the eventhandler as a prop to TodoDisplay as only Container has the state of isEditing
         />
       )}
     </div>
