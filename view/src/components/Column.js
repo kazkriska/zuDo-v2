@@ -1,16 +1,23 @@
 import React, { createContext } from 'react';
 import TodoContainer from './Todo/TodoContainer';
 import CreateNewTodo from './Todo/CreateNewTodo';
+import { useDroppable } from '@dnd-kit/core';
 
 export const TodoDataContext = createContext();
 
-const Column = ({ category, todos }) => {
+// This will act as a DROPPABLE component
+const Column = ({ category, todos, id }) => {
+  const { isOver, setNodeRef } = useDroppable({ id: id }); // TODO Check if it works with destructuring also --> { id }
+  const style = {
+    color: isOver ? 'green' : undefined,
+  };
+
   return (
-    <div className="column">
+    <div className="column" ref={setNodeRef} style={style}>
       <h4 className="col-heading">{category.toUpperCase()}</h4>
       {todos.map((todo) => (
         <TodoDataContext.Provider key={todo.todo_id} value={todo}>
-          <TodoContainer key={todo.todo_id} />
+          <TodoContainer key={todo.todo_id} id={todo.todo_id} />
         </TodoDataContext.Provider>
       ))}
       {/* Only display CreateNewTodo when category is not backlog */}

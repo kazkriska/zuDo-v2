@@ -6,7 +6,8 @@ import TodoModal from './TodoModal';
 const TodoDisplay = ({handleDoubleClick}) => {
   const todoData = useContext(TodoDataContext)
   return (
-    <div className="std-box-component solid-border" onDoubleClick={handleDoubleClick}>
+    // <div className="std-box-component solid-border" onDoubleClick={handleDoubleClick}> // ! Moving box css properties into TodoContainer for better UI
+    <div className="std-box-component-without-bottom-margin" onDoubleClick={handleDoubleClick}>
       <p>{todoData.task}</p>
       <button style={{ marginLeft: 8, marginRight: 4 }} onClick={() => deleteTodo(todoData.todo_id)}> 
         Delete

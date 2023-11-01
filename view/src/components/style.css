@@ -2,9 +2,18 @@
   display: flex;
   align-items: center;
   padding: 4px 8px;
-  width: auto; 
+  width: auto;
   height: 32px;
   margin-bottom: 8px;
+}
+
+.std-box-component-without-bottom-margin {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  width: auto;
+  height: 32px;
+  /* margin-bottom: 8px; */
 }
 
 .dashed-border {
@@ -38,7 +47,6 @@
   text-align: center; /* Optional: Center text within columns */
 }
 
-
 /* .column {
   flex: 1; 
   border: 1px solid #ccc;
@@ -49,6 +57,37 @@
 .kanban-board {
   display: flex;
 } */
+
+/* .todo-container {
+  display: flex;
+}
+
+.container-item {
+  flex: 2;
+} */
+
+.todo-container {
+  display: grid;
+  grid-template-columns: 1.9fr 0.1fr;
+  grid-template-rows: 1fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: 'todo-display drag-handle';
+  padding: 4px 8px;
+  margin-bottom: 8px;
+  
+}
+
+.todo-display {
+  grid-area: todo-display;
+  align-items: center;
+}
+
+.drag-handle {
+  grid-area: drag-handle;
+  background-color: gray;
+}
 
 .col-heading {
   font-weight: 700;

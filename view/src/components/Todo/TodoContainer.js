@@ -1,30 +1,43 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState, useRef} from 'react';
 import TodoDisplay from './TodoDisplay';
 import { TodoDataContext } from '../Column';
 import TodoForm from './TodoForm';
 import { updateTodo } from '../../utils/todoRequests';
+import { useDraggable } from '@dnd-kit/core';
 
-const TodoContainer = () => {
+// This will act as a DRAGGABLE component
+const TodoContainer = ({ id }) => {
   const todoData = useContext(TodoDataContext);
   const [isEditing, setIsEditing] = useState(false);
   const [task, setTask] = useState(todoData.task); // holds the state of the input which represents the todo's task value
   const containerRef = useRef(null);
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: id,
+  }); // TODO Check if it works with destructuring also --> { id }
 
-  const handleOutsideClick = (e) => {
-    if (containerRef.current && !containerRef.current.contains(e.target)) {
-      setIsEditing(false);
-      setTask(todoData.task)
-    }
-  };
+  const style = transform
+    ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+      }
+    : undefined;
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-    // ! Be careful, in future this might behave unexpectedly because of dependency array being empty
-    // eslint-disable-next-line 
-  }, []);
+  // ! uncomment when common ref issue resolved
+  // const handleOutsideClick = (e) => {
+  //   if (containerRef.current && !containerRef.current.contains(e.target)) {
+  //     setIsEditing(false);
+  //     setTask(todoData.task);
+  //   }
+  // };
+
+  // ! uncomment when common ref issue resolved
+  // useEffect(() => {
+  //   document.addEventListener('mousedown', handleOutsideClick);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleOutsideClick);
+  //   };
+  //   // ! Be careful, in future this might behave unexpectedly because of dependency array being empty
+  //   // eslint-disable-next-line
+  // }, []);
 
   //handles editing existing todo
   const handleSubmit = (e) => {
@@ -36,14 +49,16 @@ const TodoContainer = () => {
         setIsEditing((state) => !state);
       }
     } else {
-        alert('No change detected')
-        setIsEditing((state) => !state);
-        return
+      alert('No change detected');
+      setIsEditing((state) => !state);
+      return;
     }
   };
 
   return (
-    <div ref={containerRef}>
+    // <div ref={containerRef}> // ! old ref property which was used to control outsideClick, figure out a way to integrate with setRefNode
+    // TODO check if works without role='button'
+    <div>
       {isEditing ? (
         <TodoForm
           handleSubmit={handleSubmit}
@@ -52,9 +67,18 @@ const TodoContainer = () => {
           formButtonText={'Submit'}
         />
       ) : (
-        <TodoDisplay
-          handleDoubleClick={() => setIsEditing((state) => !state)} // <TodoContainer> passes the eventhandler as a prop to TodoDisplay as only Container has the state of isEditing
-        />
+        <div
+          ref={setNodeRef}
+          style={style}
+          className="todo-container solid-border"
+        >
+          <div className="todo-display">
+            <TodoDisplay
+              handleDoubleClick={() => setIsEditing((state) => !state)} // <TodoContainer> passes the eventhandler as a prop to TodoDisplay as only Container has the state of isEditing
+            />
+          </div>
+          <div className="drag-handle" {...listeners} {...attributes}></div>
+        </div>
       )}
     </div>
   );
