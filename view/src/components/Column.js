@@ -1,12 +1,12 @@
 import React, { createContext } from 'react';
 import TodoContainer from './Todo/TodoContainer';
 import CreateNewTodo from './Todo/CreateNewTodo';
-import { useDroppable } from '@dnd-kit/core';
+import { DragOverlay, useDroppable } from '@dnd-kit/core';
 
 export const TodoDataContext = createContext();
 
 // This will act as a DROPPABLE component
-const Column = ({ category, todos, id }) => {
+const Column = ({ category, todos, id, isDragging }) => {
   const { isOver, setNodeRef } = useDroppable({ id: id }); // TODO Check if it works with destructuring also --> { id }
   const style = {
     color: isOver ? 'green' : undefined,
@@ -17,9 +17,15 @@ const Column = ({ category, todos, id }) => {
       <h4 className="col-heading">{category.toUpperCase()}</h4>
       {todos.map((todo) => (
         <TodoDataContext.Provider key={todo.todo_id} value={todo}>
-          <TodoContainer key={todo.todo_id} id={todo.todo_id} />     {/* This is the DRAGGABLE item */}
+          {/* This is the DRAGGABLE item */}
+          <TodoContainer key={todo.todo_id} id={todo.todo_id} />{' '}
         </TodoDataContext.Provider>
       ))}
+      <DragOverlay>
+        {isDragging ? (
+          <div className="std-box-component">{'HEY'}</div>
+        ) : null}
+      </DragOverlay>
       {/* Only display CreateNewTodo when category is not backlog */}
       {category !== 'backlog' ? <CreateNewTodo category={category} /> : null}
     </div>

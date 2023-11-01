@@ -1,9 +1,10 @@
-import React, { useContext, useState, useRef} from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import TodoDisplay from './TodoDisplay';
 import { TodoDataContext } from '../Column';
 import TodoForm from './TodoForm';
 import { updateTodo } from '../../utils/todoRequests';
 import { useDraggable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
 
 // This will act as a DRAGGABLE component
 const TodoContainer = ({ id }) => {
@@ -15,11 +16,9 @@ const TodoContainer = ({ id }) => {
     id: id,
   }); // TODO Check if it works with destructuring also --> { id }
 
-  const style = transform
-    ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-      }
-    : undefined;
+  const style = {
+    transform: CSS.Translate.toString(transform),
+  };
 
   // ! uncomment when common ref issue resolved
   // const handleOutsideClick = (e) => {
@@ -77,7 +76,8 @@ const TodoContainer = ({ id }) => {
               handleDoubleClick={() => setIsEditing((state) => !state)} // <TodoContainer> passes the eventhandler as a prop to TodoDisplay as only Container has the state of isEditing
             />
           </div>
-          <div className="drag-handle" {...listeners} {...attributes}></div> {/* Drag Handle */}
+          <div className="drag-handle" role='button' {...listeners} {...attributes}></div>{' '}
+          {/* Drag Handle */}
         </div>
       )}
     </div>
