@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchAllTodos } from '../utils/todoRequests';
 import Column from './Column';
 import { DndContext } from '@dnd-kit/core';
+import { restrictToWindowEdges} from '@dnd-kit/modifiers'
 
 import handleDragEnd from '../utils/handleDndDragEnd';
 
@@ -21,7 +22,7 @@ const KanbanBoard = ({ children }) => {
   // ! <Column>'s below will act as our Droppable Component, MORE INFO -> (https://docs.dndkit.com/introduction/getting-started#pushing-things-a-bit-further), they have been provided key & id as required by documentation
 
   return (
-    <DndContext onDragEnd={handleDragEnd} autoScroll={false} >
+    <DndContext onDragEnd={handleDragEnd} autoScroll={false} modifiers={[restrictToWindowEdges]} > {/* might have to change back to restrictToWindowEdges, as this makes UI/UX weird, REMOVE style.css -> .kanban overflow || restrictToFirstScrollableAncestor */}
       <div className="kanban-board">
         <div className="row-container">
           <Column

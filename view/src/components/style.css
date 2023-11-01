@@ -31,6 +31,7 @@
 .kanban-board {
   display: flex;
   gap: 4px;
+  /* overflow: scroll; ! Temprorarily added scrolling to test restrictToFirstScrollableAncestor in Kanboard to restrict scrolling to the container div */
 }
 
 .row-container {

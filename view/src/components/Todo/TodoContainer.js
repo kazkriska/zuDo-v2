@@ -77,7 +77,7 @@ const TodoContainer = ({ id }) => {
               handleDoubleClick={() => setIsEditing((state) => !state)} // <TodoContainer> passes the eventhandler as a prop to TodoDisplay as only Container has the state of isEditing
             />
           </div>
-          <div className="drag-handle" {...listeners} {...attributes}></div>
+          <div className="drag-handle" {...listeners} {...attributes}></div> {/* Drag Handle */}
         </div>
       )}
     </div>

@@ -17,7 +17,7 @@ const Column = ({ category, todos, id }) => {
       <h4 className="col-heading">{category.toUpperCase()}</h4>
       {todos.map((todo) => (
         <TodoDataContext.Provider key={todo.todo_id} value={todo}>
-          <TodoContainer key={todo.todo_id} id={todo.todo_id} />
+          <TodoContainer key={todo.todo_id} id={todo.todo_id} />     {/* This is the DRAGGABLE item */}
         </TodoDataContext.Provider>
       ))}
       {/* Only display CreateNewTodo when category is not backlog */}

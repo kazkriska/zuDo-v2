@@ -1,7 +1,6 @@
 import { fetchTodoById, updateTodo } from './todoRequests';
 
 const handleDndDragEnd = async (e) => {
-    console.log(e)
   if (e.over) { // Checks if dragged item is over a droppable container, and performs CRUD operations if true 
     const droppedInColName = e.over.id.slice(0, -3);
     const [todoData] = await fetchTodoById(e.active.id);
