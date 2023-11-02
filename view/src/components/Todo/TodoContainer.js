@@ -66,6 +66,7 @@ const TodoContainer = ({ id }) => {
           formButtonText={'Submit'}
         />
       ) : (
+        // THIS is our DRAGGABLE
         <div
           ref={setNodeRef}
           style={style}
