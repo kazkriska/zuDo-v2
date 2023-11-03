@@ -21,8 +21,6 @@ const KanbanBoard = ({ children }) => {
 
   // TODO Can maybe add a state to keep todo data of todoItem being dragged to dynamicall render on overlay, then onStart setdata with async operation and on end set to null
 
-  // ! <Column>'s below will act as our Droppable Component, MORE INFO -> (https://docs.dndkit.com/introduction/getting-started#pushing-things-a-bit-further), they have been provided key & id as required by documentation
-
   return (
     <DndContext
       onDragEnd={(e) => handleDragEnd(e)}
