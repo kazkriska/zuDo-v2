@@ -6,7 +6,7 @@ import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 
 import handleDragEnd from '../utils/handleDndDragEnd';
 
-const KanbanBoard = ({ children }) => {
+const KanbanBoard = () => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
@@ -21,15 +21,12 @@ const KanbanBoard = ({ children }) => {
 
   // TODO Can maybe add a state to keep todo data of todoItem being dragged to dynamicall render on overlay, then onStart setdata with async operation and on end set to null
 
-  // ! <Column>'s below will act as our Droppable Component, MORE INFO -> (https://docs.dndkit.com/introduction/getting-started#pushing-things-a-bit-further), they have been provided key & id as required by documentation
-
   return (
     <DndContext
-      onDragEnd={(e) => handleDragEnd(e)}
+      onDragEnd={handleDragEnd}
       autoScroll={false}
       modifiers={[restrictToWindowEdges]}
     >
-      {/* might have to change back to restrictToWindowEdges, as this makes UI/UX weird, REMOVE style.css -> .kanban overflow || restrictToFirstScrollableAncestor */}
       <div className="kanban-board">
         <div className="row-container">
           <Column
